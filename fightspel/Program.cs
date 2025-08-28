@@ -3,27 +3,25 @@ using System.Formats.Asn1;
 using System.Net.Quic;
 
 
- static void Fight()
+static void Fight()
 {
-    
 
 
-int p1Hp = 100;
-int p2Hp = 100;
+    int gemsStart = 50;
+    int p1Hp = 100;
+    int p2Hp = 100;
 
-string p1Name = "Alex";
-string p2Name = "Calin";
+    Console.WriteLine("Vad heter du?");
 
-    // for (int i = 0; i < p1Hp || i < p2Hp; i++)
-    // {
-    //     Console.WriteLine($"{p1Name}: {p1Hp}");
-    //     Console.WriteLine($"{p2Name}: {p2Hp}");
-    //     p2Hp -= Random.Shared.Next(10, 25);
-    //     p1Hp -= Random.Shared.Next(10, 25);
+    string p1Name = "";
+    while (p1Name.Length == 0 || int.TryParse(p1Name, out int bullshit))
+    {
 
-    //     Console.ReadLine();
+        p1Name = Console.ReadLine() ?? string.Empty;
+        Console.WriteLine("try again buddy");
+    }
 
-    // }
+    string p2Name = "Calin";
 
     while (p1Hp > 0 && p2Hp > 0)
     {
@@ -35,29 +33,34 @@ string p2Name = "Calin";
         Console.ReadLine();
     }
 
-    if (p1Hp < 0)
-        {
-            p1Hp = 0;
-            Console.WriteLine($"{p1Name}: {p1Hp}");
-            Console.WriteLine($"{p2Name}: {p2Hp}");
-            Console.WriteLine($"{p2Name} is the winner!");
+    if (p2Hp <= 0 && p1Hp <= 0)
+    {
+        p2Hp = 0;
+        p1Hp = 0;
+        Console.WriteLine($"{p1Name}: {p1Hp}");
+        Console.WriteLine($"{p2Name}: {p2Hp}");
+        Console.WriteLine("Nobody is the winner! GG");
+    }
 
-        }
-        else if (p2Hp < 0)
-        {
-            p2Hp = 0;
-            Console.WriteLine($"{p1Name}: {p1Hp}");
-            Console.WriteLine($"{p2Name}: {p2Hp}");
-            Console.WriteLine($"{p1Name} is the winner!");
-        }
-    if (p2Hp < 0 && p1Hp < 0)
-{
-    p2Hp = 0;
-    p1Hp = 0;
-    Console.WriteLine($"{p1Name}: {p1Hp}");
-    Console.WriteLine($"{p2Name}: {p2Hp}");
-    Console.WriteLine("Nobody is the winner! GG");
-}
+    else if (p1Hp <= 0)
+    {
+        p1Hp = 0;
+        Console.WriteLine($"{p1Name}: {p1Hp}");
+        Console.WriteLine($"{p2Name}: {p2Hp}");
+        Console.WriteLine($"{p2Name} is the winner!");
+
+        Console.WriteLine($"Do you want to revive yourself with 20 gems? You currently have {gemsStart} Gems. Y/N");
+        string revive = Console.ReadLine();
+        
+    }
+    else if (p2Hp <= 0)
+    {
+        p2Hp = 0;
+        Console.WriteLine($"{p1Name}: {p1Hp}");
+        Console.WriteLine($"{p2Name}: {p2Hp}");
+        Console.WriteLine($"{p1Name} is the winner!");
+    }
+   
 
 
     Console.ReadLine();
